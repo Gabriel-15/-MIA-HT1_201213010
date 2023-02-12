@@ -8,24 +8,28 @@ cout<<"1. Registro Profesor"<<endl;
 cout<<"2. Registro Estudiante"<<endl;
 cout<<"3. Ver Registro"<<endl;
 cout<<"4. Salir"<<endl;
+cout<<"     "<<endl;
 }
+//Menu de visualización
+
 
 //Struct para los atributos de Profesor
 struct Profesor
 {
     int Id_profesor;
-    char CUI[13];
+    char CUI[15];
     char Nombre[25];
     char Curso[25];
-    /* data */
+   
 }profesor;
+
 //Struct para estudiante
 struct Estudiante
 {
     int Id_estudiante;
-    char CUI[13];
+    char CUI[15];
     char Nombre[25];
-    char Carnet[10];
+    char Carnet[25];
     /* data */
 }estudiante;
 //metodo para agregar atrigutos al struct Profesor
@@ -64,16 +68,23 @@ fstream archivo("Estudiante.bin",ios::binary|ios::out|ios::app);
         archivo.close();
 }
 //mostrar lista de estudiantes()
+void viwRegEstudiante(){
+    ifstream archivo("Estudiante.bin" );
+    cout<<"ID   "<<"CUI             "<<"NOMBRE                  "<<"CARNE                   "<<endl;
+    cout<<estudiante.Id_estudiante<<"   "<<estudiante.CUI<<"   "<<estudiante.Nombre<<"             "<<estudiante.Carnet<<endl;
+    cout<<" "<<endl;
+}
+//mostrar profesor
 void viwRegProfesor(){
     ifstream archivo("Profesor.bin" );
-    if(archivo==NULL){   
-
-    }
-
+    cout<<"ID   "<<"CUI             "<<"NOMBRE                  "<<"CURSO                   "<<endl;
+    cout<<profesor.Id_profesor<<"   "<<profesor.CUI<<"   "<<profesor.Nombre<<"             "<<profesor.Curso<<endl;
+    cout<<" "<<endl;
 }
 //Inicio del programa
 int main(){
     int select;
+    int select1;
     bool bsalir =false;
 //dowhile que manejara el flujo de la app
 do{
@@ -82,7 +93,7 @@ do{
 
         cout<<"\nIngrese una opicion: ";
         cin>>select;
-
+        
        
         Estudiante *estudiante = new Estudiante;
 
@@ -96,10 +107,17 @@ do{
             addRegEstudiante();
             break;
         case 3:
-            cout<<"ID: "<<profesor.Id_profesor<<endl;
-            cout<<"CUI: "<<profesor.CUI<<endl;
-            cout<<"NOMBRE: "<<profesor.Nombre<<endl;
-            cout<<"CURSO: "<<profesor.Curso<<endl;
+        
+            cout<<"1. Visualizar Profesor"<<endl;
+            cout<<"2. Visualizar Esdutiante"<<endl;
+            cout<<"    "<<endl;
+            cin>>select1;
+            if(select1==1){
+                viwRegProfesor();
+
+            }else{
+                viwRegEstudiante();
+            }
                         
             break;
         case 4:
